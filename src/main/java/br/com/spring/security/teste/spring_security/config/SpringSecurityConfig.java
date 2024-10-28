@@ -38,8 +38,12 @@ public class SpringSecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .sessionManagement((session) -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                );
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests((auth) -> auth
+                       //EXEMPLO MATCHERS
+                       // .requestMatchers("/v1/**").hasRole("USER")
+                       // .anyRequest().authenticated()
+                        .anyRequest().permitAll());
         return http.build();
     }
 }
